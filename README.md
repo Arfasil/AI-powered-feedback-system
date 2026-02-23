@@ -1,101 +1,128 @@
 # AI-Powered Course Feedback Collection System
 
-Full-stack project for collecting course feedback, managing courses/users, and viewing analytics.
+This is a full-stack web application designed to collect and analyze course feedback using AI. It provides a platform for students to give feedback, for teachers to view analytics and for administrators to manage the system.
 
-## Tech Stack
-- Backend: Flask + SQLite
-- Frontend: React
-- Database: SQLite (`backend/feedback.db`)
+## About The Project
 
-## Project Structure
-```text
+This project is built with a React frontend and a Flask backend. It uses a SQLite database to store data. The AI component provides sentiment analysis and keyword extraction on the feedback submitted by students.
+
+### Features:
+*   **Role-based access control:** with three roles: `student`, `teacher`, and `admin`.
+*   **Authentication:** using JWT.
+*   **Course Management:** Admins and Teachers can create, update, and delete courses.
+*   **Feedback System:** Students can submit feedback for courses.
+*   **AI Analytics:** Teachers can view AI-powered analytics of the feedback, including sentiment analysis and keyword extraction.
+*   **Admin Dashboard:** Admins have a dashboard to manage users and courses.
+
+## Built With
+
+This project is built with the following technologies:
+
+### Frontend
+*   [React](https://reactjs.org/)
+*   [Axios](https://axios-http.com/)
+*   [React Router](https://reactrouter.com/)
+
+### Backend
+*   [Flask](https://flask.palletsprojects.com/)
+*   [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/)
+*   [Flask-JWT-Extended](https://flask-jwt-extended.readthedocs.io/)
+*   [Flask-CORS](https://flask-cors.readthedocs.io/)
+*   [Flask-Bcrypt](https://flask-bcrypt.readthedocs.io/)
+*   [scikit-learn](https://scikit-learn.org/stable/)
+*   [NLTK](https://www.nltk.org/)
+*   [TextBlob](https://textblob.readthedocs.io/)
+
+### Database
+*   [SQLite](https://www.sqlite.org/index.html)
+
+## Getting Started
+
+To get a local copy up and running follow these simple steps.
+
+### Prerequisites
+
+You need to have Node.js and Python installed on your machine.
+
+*   npm
+    ```sh
+    npm install npm@latest -g
+    ```
+*   python
+    ```sh
+    # Make sure you have python installed
+    python --version
+    ```
+
+### Installation
+
+1.  Clone the repo
+    ```sh
+    git clone https://github.com/your_username_/Project-Name.git
+    ```
+2.  Install NPM packages for frontend
+    ```sh
+    cd frontend
+    npm install
+    ```
+3.  Install python packages for backend
+    ```sh
+    cd backend
+    pip install -r requirements.txt
+    ```
+
+## Usage
+
+### Running the application
+
+1.  **Backend**
+    ```sh
+    cd backend
+    flask run
+    ```
+    The backend will be running on `http://127.0.0.1:5000`
+
+2.  **Frontend**
+    ```sh
+    cd frontend
+    npm start
+    ```
+    The frontend will be running on `http://localhost:3000`
+
+Now you can open your browser and navigate to `http://localhost:3000` to use the application.
+
+## Folder Structure
+
+The project is organized into two main folders: `frontend` and `backend`.
+
+```
 .
-├─ backend/
-│  ├─ app.py
-│  ├─ requirements.txt
-│  ├─ feedback.db
-│  ├─ view_database.py
-│  ├─ list_users.py
-│  ├─ restore_admin.py
-│  └─ activate_admin.py
-└─ frontend/
-   ├─ package.json
-   └─ src/
+├── backend
+│   ├── app.py              # Main Flask application
+│   ├── requirements.txt    # Python dependencies
+│   ├── feedback.db         # SQLite database
+│   └── ...
+└── frontend
+    ├── src
+    │   ├── App.js          # Main React component
+    │   ├── index.js        # Entry point for React
+    │   ├── pages           # Different pages of the application
+    │   ├── components      # Reusable components
+    │   └── ...
+    ├── package.json        # Node.js dependencies
+    └── ...
 ```
 
-## Prerequisites
-- Python 3.10+
-- Node.js 18+ and npm
+## Contributing
 
-## Backend Setup
-From project root:
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-```powershell
-cd backend
-python -m venv env
-.\env\Scripts\activate
-pip install -r requirements.txt
-python app.py
-```
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
-Backend runs on: `http://localhost:5000`
+## License
 
-Notes:
-- On first run, `app.py` initializes and seeds `feedback.db`.
-- If your venv already exists, only run:
-
-```powershell
-cd backend
-.\env\Scripts\activate
-python app.py
-```
-
-## Frontend Setup
-Open a new terminal from project root:
-
-```powershell
-cd frontend
-npm install
-npm start
-```
-
-Frontend runs on: `http://localhost:3000`
-
-`frontend/package.json` includes:
-- `"proxy": "http://localhost:5000"`
-
-## Default Seed Credentials
-- Admin: `admin` / `admin123`
-- Teacher: `prof_smith` / `teacher123`
-- Student: `student1` / `student123`
-
-If admin is missing/inactive:
-
-```powershell
-cd backend
-python restore_admin.py
-python activate_admin.py
-```
-
-## View Database Values
-Use the inspection script:
-
-```powershell
-cd backend
-python view_database.py
-```
-
-Useful options:
-
-```powershell
-python view_database.py --table users
-python view_database.py --limit 5
-python view_database.py --table feedback_answers --limit 50
-```
-
-## Common Dev Commands
-- Backend start: `python backend\app.py`
-- Frontend start: `npm --prefix frontend start`
-- Frontend test: `npm --prefix frontend test`
-- Frontend build: `npm --prefix frontend run build`
-
+Distributed under the MIT License. See `LICENSE` for more information.
