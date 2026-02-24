@@ -73,7 +73,7 @@ export default function TeacherAnalytics() {
   const { user } = useAuth();
   const [data, setData] = useState(null);
   const [trends, setTrends] = useState([]);
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedCourse, setSelectedCourse] = useState('');
   const [courseAnalytics, setCourseAnalytics] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -88,10 +88,19 @@ export default function TeacherAnalytics() {
     }).catch(() => setLoading(false));
   }, [user.id]);
 
-  const loadCourseAnalytics = (courseId) => {
-    setSelectedCourse(courseId);
-    api.get(`/courses/${courseId}/analytics`).then(r => setCourseAnalytics(r.data));
-  };
+ const loadCourseAnalytics = (courseId) => {
+  if (!courseId) {
+    setSelectedCourse('');
+    setCourseAnalytics(null);
+    return;
+  }
+
+  setSelectedCourse(courseId);
+
+  api.get(`/courses/${courseId}/analytics`)
+    .then(r => setCourseAnalytics(r.data))
+    .catch(() => setCourseAnalytics(null));
+};
 
   if (loading) return <div className="page-loader"><div className="spinner" /></div>;
 
@@ -132,9 +141,13 @@ export default function TeacherAnalytics() {
         <div className="card">
           <h3 className="font-semibold mb-4">Course Sentiment Analysis</h3>
           <div className="form-group">
-            <select className="form-select" value={selectedCourse || ''} onChange={e => loadCourseAnalytics(e.target.value)}>
+           <select
+  className="form-select"
+  value={selectedCourse}
+  onChange={e => loadCourseAnalytics(e.target.value)}
+>
               <option value="">Select a course...</option>
-              {data?.courses_analytics?.map(c => <option key={c.course_id} value={c.course_id}>{c.course_title}</option>)}
+              {data?.courses_analytics?.map(c => <option key={c.course_id} value={string.course_id}>{c.course_title}</option>)}
             </select>
           </div>
           {courseAnalytics ? (
